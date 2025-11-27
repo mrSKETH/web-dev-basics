@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практические примеры | SKETHWeb Course</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Quick Start Section */
+        .quick-start {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+
+        .template-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .template-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .template-header h3 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .template-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .template-preview {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px dashed #ddd;
+        }
+
+        .preview-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .preview-content h1 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+        }
+
+        .preview-content p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .preview-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .preview-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .template-instructions {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 25px;
+        }
+
+        .template-instructions h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .template-instructions ol {
+            margin-left: 20px;
+        }
+
+        .template-instructions li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background-color: #282c34;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .copy-btn {
+            position: relative;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 10px 0 20px;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Examples Section */
+        .examples {
+            padding: 60px 0;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 40px;
+        }
+
+        .example-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+        }
+
+        .example-header h3 {
+            margin-bottom: 10px;
+        }
+
+        .example-content {
+            padding: 25px;
+        }
+
+        .demo-area {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .code-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .code-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .code-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .code-container {
+            position: relative;
+        }
+
+        .code-block {
+            background-color: #282c34;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            display: none;
+        }
+
+        .code-block.active {
+            display: block;
+        }
+
+        .copy-btn-small {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn-small:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        /* Interactive Elements */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .todo-list {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .todo-item.completed span {
+            text-decoration: line-through;
+            color: var(--gray);
+        }
+
+        .color-picker-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .color-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--secondary), #1a1a2e);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        .support {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .support span {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                margin-top: 0;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">SKETHWeb<span>Course</span></div>
+                <h1>Практические примеры</h1>
+                <p>Интерактивные демонстрации совместной работы HTML, CSS и JavaScript</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">SKETHWeb<span>Course</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="html-course.html">Курс HTML</a></li>
+                <li><a href="css-course.html">Курс CSS</a></li>
+                <li><a href="lesson-js-1.html">Курс JavaScript</a></li>
+            </ul>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </a>
+        </div>
+    </nav>
+
+    <!-- fix and dont Remove -->
+    <section class="quick-start">
+        <div class="container">
+                <button id="copyTemplateBtn">
+                </button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="examples">
+        <div class="container">
+            <h2 class="section-title">Интерактивные примеры</h2>
+
+            <div class="example-grid">
+                <!-- Example 1: Interactive Counter -->
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>Интерактивный счетчик</h3>
+                        <p>Изменение состояния через JavaScript</p>
+                    </div>
+                    <div class="example-content">
+                        <div class="demo-area">
+                            <div class="counter" id="counterValue">0</div>
+                            <div>
+                                <button class="btn" id="decrementBtn">-</button>
+                                <button class="btn" id="resetBtn">Сброс</button>
+                                <button class="btn" id="incrementBtn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="html1">HTML</button>
+                            <button class="code-tab" data-tab="css1">CSS</button>
+                            <button class="code-tab" data-tab="js1">JavaScript</button>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-block active" id="html1">
+                                <button class="copy-btn-small" data-target="html1">Копировать</button>
+                                <pre><code class="language-html">&lt;div class="counter" id="counterValue"&gt;0&lt;/div&gt;
+&lt;div&gt;
+    &lt;button class="btn" id="decrementBtn"&gt;-&lt;/button&gt;
+    &lt;button class="btn" id="resetBtn"&gt;Сброс&lt;/button&gt;
+    &lt;button class="btn" id="incrementBtn"&gt;+&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="code-block" id="css1">
+                                <button class="copy-btn-small" data-target="css1">Копировать</button>
+                                <pre><code class="language-css">.counter {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 20px 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--secondary);
+}</code></pre>
+                            </div>
+
+                            <div class="code-block" id="js1">
+                                <button class="copy-btn-small" data-target="js1">Копировать</button>
+                                <pre><code class="language-javascript">let count = 0;
+const counterElement = document.getElementById('counterValue');
+const incrementBtn = document.getElementById('incrementBtn');
+const decrementBtn = document.getElementById('decrementBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+function updateCounter() {
+    counterElement.textContent = count;
+    counterElement.style.color = count > 0 ? '#3a0ca3' : count < 0 ? '#f72585' : '#6c757d';
+}
+
+incrementBtn.addEventListener('click', () => {
+    count++;
+    updateCounter();
+});
+
+decrementBtn.addEventListener('click', () => {
+    count--;
+    updateCounter();
+});
+
+resetBtn.addEventListener('click', () => {
+    count = 0;
+    updateCounter();
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2: Color Changer -->
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>Изменение цвета</h3>
+                        <p>Динамическое изменение стилей через JS</p>
+                    </div>
+                    <div class="example-content">
+                        <div class="demo-area">
+                            <div class="color-picker-container">
+                                <div class="color-display" id="colorDisplay"></div>
+                                <div>
+                                    <input type="color" id="colorPicker" value="#4361ee">
+                                    <button class="btn" id="randomColorBtn">Случайный цвет</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="html2">HTML</button>
+                            <button class="code-tab" data-tab="css2">CSS</button>
+                            <button class="code-tab" data-tab="js2">JavaScript</button>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-block active" id="html2">
+                                <button class="copy-btn-small" data-target="html2">Копировать</button>
+                                <pre><code class="language-html">&lt;div class="color-picker-container"&gt;
+    &lt;div class="color-display" id="colorDisplay"&gt;&lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="color" id="colorPicker" value="#4361ee"&gt;
+        &lt;button class="btn" id="randomColorBtn"&gt;Случайный цвет&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="code-block" id="css2">
+                                <button class="copy-btn-small" data-target="css2">Копировать</button>
+                                <pre><code class="language-css">.color-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.color-display {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: background-color 0.3s;
+}</code></pre>
+                            </div>
+
+                            <div class="code-block" id="js2">
+                                <button class="copy-btn-small" data-target="js2">Копировать</button>
+                                <pre><code class="language-javascript">const colorDisplay = document.getElementById('colorDisplay');
+const colorPicker = document.getElementById('colorPicker');
+const randomColorBtn = document.getElementById('randomColorBtn');
+
+// Установить начальный цвет
+colorDisplay.style.backgroundColor = colorPicker.value;
+
+// Обработчик изменения цвета через пикер
+colorPicker.addEventListener('input', () => {
+    colorDisplay.style.backgroundColor = colorPicker.value;
+});
+
+// Генерация случайного цвета
+randomColorBtn.addEventListener('click', () => {
+    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    colorDisplay.style.backgroundColor = randomColor;
+    colorPicker.value = randomColor;
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 3: Progress Bar -->
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>Анимированный прогресс-бар</h3>
+                        <p>CSS анимации и управление через JS</p>
+                    </div>
+                    <div class="example-content">
+                        <div class="demo-area">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div>
+                                <button class="btn" id="startProgressBtn">Запустить</button>
+                                <button class="btn" id="resetProgressBtn">Сбросить</button>
+                            </div>
+                        </div>
+
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="html3">HTML</button>
+                            <button class="code-tab" data-tab="css3">CSS</button>
+                            <button class="code-tab" data-tab="js3">JavaScript</button>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-block active" id="html3">
+                                <button class="copy-btn-small" data-target="html3">Копировать</button>
+                                <pre><code class="language-html">&lt;div class="progress-bar"&gt;
+    &lt;div class="progress-fill" id="progressFill"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;button class="btn" id="startProgressBtn"&gt;Запустить&lt;/button&gt;
+    &lt;button class="btn" id="resetProgressBtn"&gt;Сбросить&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="code-block" id="css3">
+                                <button class="copy-btn-small" data-target="css3">Копировать</button>
+                                <pre><code class="language-css">.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    width: 0%;
+    transition: width 0.5s ease;
+}</code></pre>
+                            </div>
+
+                            <div class="code-block" id="js3">
+                                <button class="copy-btn-small" data-target="js3">Копировать</button>
+                                <pre><code class="language-javascript">const progressFill = document.getElementById('progressFill');
+const startProgressBtn = document.getElementById('startProgressBtn');
+const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+let progressInterval;
+
+function startProgress() {
+    let width = 0;
+    clearInterval(progressInterval);
+
+    progressInterval = setInterval(() => {
+        if (width >= 100) {
+            clearInterval(progressInterval);
+        } else {
+            width++;
+            progressFill.style.width = width + '%';
+        }
+    }, 30);
+}
+
+function resetProgress() {
+    clearInterval(progressInterval);
+    progressFill.style.width = '0%';
+}
+
+startProgressBtn.addEventListener('click', startProgress);
+resetProgressBtn.addEventListener('click', resetProgress);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 4: Todo List -->
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>Список задач</h3>
+                        <p>Динамическое управление DOM элементами</p>
+                    </div>
+                    <div class="example-content">
+                        <div class="demo-area">
+                            <div class="todo-list">
+                                <div style="margin-bottom: 15px;">
+                                    <input type="text" id="todoInput" placeholder="Новая задача..." style="padding: 8px; width: 70%; margin-right: 10px;">
+                                    <button class="btn" id="addTodoBtn">Добавить</button>
+                                </div>
+                                <div id="todoList"></div>
+                            </div>
+                        </div>
+
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="html4">HTML</button>
+                            <button class="code-tab" data-tab="css4">CSS</button>
+                            <button class="code-tab" data-tab="js4">JavaScript</button>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-block active" id="html4">
+                                <button class="copy-btn-small" data-target="html4">Копировать</button>
+                                <pre><code class="language-html">&lt;div class="todo-list"&gt;
+    &lt;div style="margin-bottom: 15px;"&gt;
+        &lt;input type="text" id="todoInput" placeholder="Новая задача..."&gt;
+        &lt;button class="btn" id="addTodoBtn"&gt;Добавить&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id="todoList"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="code-block" id="css4">
+                                <button class="copy-btn-small" data-target="css4">Копировать</button>
+                                <pre><code class="language-css">.todo-list {
+    width: 100%;
+    max-width: 400px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.todo-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.todo-item.completed span {
+    text-decoration: line-through;
+    color: var(--gray);
+}</code></pre>
+                            </div>
+
+                            <div class="code-block" id="js4">
+                                <button class="copy-btn-small" data-target="js4">Копировать</button>
+                                <pre><code class="language-javascript">const todoInput = document.getElementById('todoInput');
+const addTodoBtn = document.getElementById('addTodoBtn');
+const todoList = document.getElementById('todoList');
+
+function addTodo() {
+    const taskText = todoInput.value.trim();
+    if (taskText === '') return;
+
+    const todoItem = document.createElement('div');
+    todoItem.className = 'todo-item';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+
+    const taskSpan = document.createElement('span');
+    taskSpan.textContent = taskText;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Удалить';
+    deleteBtn.className = 'btn';
+    deleteBtn.style.marginLeft = 'auto';
+    deleteBtn.style.padding = '5px 10px';
+    deleteBtn.style.fontSize = '0.8rem';
+
+    checkbox.addEventListener('change', () => {
+        todoItem.classList.toggle('completed', checkbox.checked);
+    });
+
+    deleteBtn.addEventListener('click', () => {
+        todoList.removeChild(todoItem);
+    });
+
+    todoItem.appendChild(checkbox);
+    todoItem.appendChild(taskSpan);
+    todoItem.appendChild(deleteBtn);
+    todoList.appendChild(todoItem);
+
+    todoInput.value = '';
+}
+
+addTodoBtn.addEventListener('click', addTodo);
+todoInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addTodo();
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Copy template functionality
+        document.getElementById('copyTemplateBtn').addEventListener('click', () => {
+            const templateCode = `<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя страница</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать на мою страницу</h1> <!-- ЗАМЕНИТЕ ЭТО: Ваш заголовок -->
+        <p>Это простая и элегантная веб-страница, созданная с помощью HTML и CSS. Вы можете легко настроить её под свои нужды.</p> <!-- ЗАМЕНИТЕ ЭТО: Ваше описание -->
+        <a href="#" class="btn">Узнать больше</a> <!-- ЗАМЕНИТЕ ЭТО: Текст кнопки и ссылка -->
+    </div>
+</body>
+</html>`;
+
+            navigator.clipboard.writeText(templateCode).then(() => {
+                const btn = document.getElementById('copyTemplateBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Код скопирован!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.code-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                const container = tab.closest('.example-content');
+
+                // Remove active class from all tabs
+                container.querySelectorAll('.code-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Hide all code blocks
+                container.querySelectorAll('.code-block').forEach(block => {
+                    block.classList.remove('active');
+                });
+
+                // Show selected code block
+                container.querySelector(`#${tabId}`).classList.add('active');
+            });
+        });
+
+        // Copy button functionality
+        document.querySelectorAll('.copy-btn-small').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-target');
+                const codeBlock = document.getElementById(targetId);
+                const code = codeBlock.querySelector('code').textContent;
+
+                navigator.clipboard.writeText(code).then(() => {
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Скопировано!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 2000);
+                });
+            });
+        });
+
+        // Example 1: Interactive Counter
+        let count = 0;
+        const counterElement = document.getElementById('counterValue');
+        const incrementBtn = document.getElementById('incrementBtn');
+        const decrementBtn = document.getElementById('decrementBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateCounter() {
+            counterElement.textContent = count;
+            counterElement.style.color = count > 0 ? '#3a0ca3' : count < 0 ? '#f72585' : '#6c757d';
+        }
+
+        incrementBtn.addEventListener('click', () => {
+            count++;
+            updateCounter();
+        });
+
+        decrementBtn.addEventListener('click', () => {
+            count--;
+            updateCounter();
+        });
+
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            updateCounter();
+        });
+
+        // Example 2: Color Changer
+        const colorDisplay = document.getElementById('colorDisplay');
+        const colorPicker = document.getElementById('colorPicker');
+        const randomColorBtn = document.getElementById('randomColorBtn');
+
+        // Установить начальный цвет
+        colorDisplay.style.backgroundColor = colorPicker.value;
+
+        // Обработчик изменения цвета через пикер
+        colorPicker.addEventListener('input', () => {
+            colorDisplay.style.backgroundColor = colorPicker.value;
+        });
+
+        // Генерация случайного цвета
+        randomColorBtn.addEventListener('click', () => {
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            colorDisplay.style.backgroundColor = randomColor;
+            colorPicker.value = randomColor;
+        });
+
+        // Example 3: Progress Bar
+        const progressFill = document.getElementById('progressFill');
+        const startProgressBtn = document.getElementById('startProgressBtn');
+        const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+        let progressInterval;
+
+        function startProgress() {
+            let width = 0;
+            clearInterval(progressInterval);
+
+            progressInterval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(progressInterval);
+                } else {
+                    width++;
+                    progressFill.style.width = width + '%';
+                }
+            }, 30);
+        }
+
+        function resetProgress() {
+            clearInterval(progressInterval);
+            progressFill.style.width = '0%';
+        }
+
+        startProgressBtn.addEventListener('click', startProgress);
+        resetProgressBtn.addEventListener('click', resetProgress);
+
+        // Example 4: Todo List
+        const todoInput = document.getElementById('todoInput');
+        const addTodoBtn = document.getElementById('addTodoBtn');
+        const todoList = document.getElementById('todoList');
+
+        function addTodo() {
+            const taskText = todoInput.value.trim();
+            if (taskText === '') return;
+
+            const todoItem = document.createElement('div');
+            todoItem.className = 'todo-item';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+
+            const taskSpan = document.createElement('span');
+            taskSpan.textContent = taskText;
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Удалить';
+            deleteBtn.className = 'btn';
+            deleteBtn.style.marginLeft = 'auto';
+            deleteBtn.style.padding = '5px 10px';
+            deleteBtn.style.fontSize = '0.8rem';
+
+            checkbox.addEventListener('change', () => {
+                todoItem.classList.toggle('completed', checkbox.checked);
+            });
+
+            deleteBtn.addEventListener('click', () => {
+                todoList.removeChild(todoItem);
+            });
+
+            todoItem.appendChild(checkbox);
+            todoItem.appendChild(taskSpan);
+            todoItem.appendChild(deleteBtn);
+            todoList.appendChild(todoItem);
+
+            todoInput.value = '';
+        }
+
+        addTodoBtn.addEventListener('click', addTodo);
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodo();
+        });
+    </script>
+        <!-- Examples Section -->
+<section class="examples">
+    <div class="container">
+        <h2 class="section-title">Практические блоки для сайта</h2>
+
+        <div class="example-grid">
+            <!-- Example 1: Hero Section -->
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Главный баннер (Hero Section)</h3>
+                    <p>Первое, что видят посетители на сайте</p>
+                </div>
+                <div class="example-content">
+                    <div class="demo-area">
+                        <div style="text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 10px; width: 100%;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 20px;">Добро пожаловать на наш сайт</h1>
+                            <p style="font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Создаем современные и функциональные веб-сайты для вашего бизнеса</p>
+                            <div>
+                                <button class="btn" style="margin: 5px;">Начать работу</button>
+                                <button class="btn" style="margin: 5px; background: transparent; border: 2px solid white;">Узнать больше</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" data-tab="hero-html">HTML</button>
+                        <button class="code-tab" data-tab="hero-css">CSS</button>
+                    </div>
+
+                    <div class="code-container">
+                        <div class="code-block active" id="hero-html">
+                            <button class="copy-btn-small" data-target="hero-html">Копировать</button>
+                            <pre><code class="language-html">&lt;section class="hero"&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Добро пожаловать на наш сайт&lt;/h1&gt;
+        &lt;p&gt;Создаем современные и функциональные веб-сайты для вашего бизнеса&lt;/p&gt;
+        &lt;div class="hero-buttons"&gt;
+            &lt;button class="btn primary"&gt;Начать работу&lt;/button&gt;
+            &lt;button class="btn secondary"&gt;Узнать больше&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                        </div>
+
+                        <div class="code-block" id="hero-css">
+                            <button class="copy-btn-small" data-target="hero-css">Копировать</button>
+                            <pre><code class="language-css">.hero {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn.primary {
+    background: white;
+    color: #667eea;
+    border: none;
+}
+
+.btn.secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 2: Features Section -->
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Блок преимуществ</h3>
+                    <p>Покажите сильные стороны вашего продукта</p>
+                </div>
+                <div class="example-content">
+                    <div class="demo-area">
+                        <div style="width: 100%;">
+                            <h2 style="text-align: center; margin-bottom: 40px; color: #3a0ca3;">Наши преимущества</h2>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                                <div style="text-align: center; padding: 20px;">
+                                    <div style="width: 60px; height: 60px; background: #4361ee; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: white;">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <h3 style="margin-bottom: 10px;">Быстрая работа</h3>
+                                    <p style="color: #666;">Наши сайты загружаются мгновенно и работают без задержек</p>
+                                </div>
+                                <div style="text-align: center; padding: 20px;">
+                                    <div style="width: 60px; height: 60px; background: #4361ee; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: white;">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <h3 style="margin-bottom: 10px;">Адаптивный дизайн</h3>
+                                    <p style="color: #666;">Идеальное отображение на всех устройствах и экранах</p>
+                                </div>
+                                <div style="text-align: center; padding: 20px;">
+                                    <div style="width: 60px; height: 60px; background: #4361ee; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: white;">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <h3 style="margin-bottom: 10px;">Поддержка 24/7</h3>
+                                    <p style="color: #666;">Всегда готовы помочь и ответить на ваши вопросы</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" data-tab="features-html">HTML</button>
+                        <button class="code-tab" data-tab="features-css">CSS</button>
+                    </div>
+
+                    <div class="code-container">
+                        <div class="code-block active" id="features-html">
+                            <button class="copy-btn-small" data-target="features-html">Копировать</button>
+                            <pre><code class="language-html">&lt;section class="features"&gt;
+    &lt;div class="container"&gt;
+        &lt;h2&gt;Наши преимущества&lt;/h2&gt;
+        &lt;div class="features-grid"&gt;
+            &lt;div class="feature-card"&gt;
+                &lt;div class="feature-icon"&gt;
+                    &lt;i class="fas fa-rocket"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3&gt;Быстрая работа&lt;/h3&gt;
+                &lt;p&gt;Наши сайты загружаются мгновенно и работают без задержек&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="feature-card"&gt;
+                &lt;div class="feature-icon"&gt;
+                    &lt;i class="fas fa-mobile-alt"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3&gt;Адаптивный дизайн&lt;/h3&gt;
+                &lt;p&gt;Идеальное отображение на всех устройствах и экранах&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="feature-card"&gt;
+                &lt;div class="feature-icon"&gt;
+                    &lt;i class="fas fa-headset"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3&gt;Поддержка 24/7&lt;/h3&gt;
+                &lt;p&gt;Всегда готовы помочь и ответить на ваши вопросы&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                        </div>
+
+                        <div class="code-block" id="features-css">
+                            <button class="copy-btn-small" data-target="features-css">Копировать</button>
+                            <pre><code class="language-css">.features {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #3a0ca3;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: #4361ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: white;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #666;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 3: Contact Form -->
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Контактная форма</h3>
+                    <p>Позвольте клиентам легко связаться с вами</p>
+                </div>
+                <div class="example-content">
+                    <div class="demo-area">
+                        <div style="width: 100%; max-width: 500px; margin: 0 auto;">
+                            <h3 style="text-align: center; margin-bottom: 20px;">Свяжитесь с нами</h3>
+                            <form style="display: flex; flex-direction: column; gap: 15px;">
+                                <input type="text" placeholder="Ваше имя" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                                <input type="email" placeholder="Ваш email" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                                <textarea placeholder="Ваше сообщение" rows="4" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px; resize: vertical;"></textarea>
+                                <button type="submit" class="btn" style="width: 100%;">Отправить сообщение</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" data-tab="form-html">HTML</button>
+                        <button class="code-tab" data-tab="form-css">CSS</button>
+                    </div>
+
+                    <div class="code-container">
+                        <div class="code-block active" id="form-html">
+                            <button class="copy-btn-small" data-target="form-html">Копировать</button>
+                            <pre><code class="language-html">&lt;section class="contact"&gt;
+    &lt;div class="container"&gt;
+        &lt;h2&gt;Свяжитесь с нами&lt;/h2&gt;
+        &lt;form class="contact-form"&gt;
+            &lt;input type="text" placeholder="Ваше имя" required&gt;
+            &lt;input type="email" placeholder="Ваш email" required&gt;
+            &lt;textarea placeholder="Ваше сообщение" rows="4" required&gt;&lt;/textarea&gt;
+            &lt;button type="submit" class="btn"&gt;Отправить сообщение&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                        </div>
+
+                        <div class="code-block" id="form-css">
+                            <button class="copy-btn-small" data-target="form-css">Копировать</button>
+                            <pre><code class="language-css">.contact {
+    padding: 80px 0;
+    background: white;
+}
+
+.contact h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 4: Pricing Table -->
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Таблица цен</h3>
+                    <p>Покажите ваши тарифы и услуги</p>
+                </div>
+                <div class="example-content">
+                    <div class="demo-area">
+                        <div style="width: 100%;">
+                            <h2 style="text-align: center; margin-bottom: 40px;">Наши тарифы</h2>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                                <div style="border: 1px solid #ddd; border-radius: 10px; padding: 30px; text-align: center; background: white;">
+                                    <h3 style="color: #4361ee; margin-bottom: 15px;">Базовый</h3>
+                                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 20px;">990₽<span style="font-size: 1rem; color: #666;">/мес</span></div>
+                                    <ul style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left;">
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ 5 страниц сайта</li>
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ Контактная форма</li>
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ Адаптивный дизайн</li>
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✗ Техподдержка</li>
+                                    </ul>
+                                    <button class="btn" style="width: 100%;">Выбрать тариф</button>
+                                </div>
+                                <div style="border: 2px solid #4361ee; border-radius: 10px; padding: 30px; text-align: center; background: white; transform: scale(1.05); position: relative;">
+                                    <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #4361ee; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem;">ПОПУЛЯРНЫЙ</div>
+                                    <h3 style="color: #4361ee; margin-bottom: 15px;">Профессиональный</h3>
+                                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 20px;">1990₽<span style="font-size: 1rem; color: #666;">/мес</span></div>
+                                    <ul style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left;">
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ 15 страниц сайта</li>
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ Контактная форма</li>
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ Адаптивный дизайн</li>
+                                        <li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ Техподдержка 24/7</li>
+                                    </ul>
+                                    <button class="btn" style="width: 100%; background: #4361ee;">Выбрать тариф</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" data-tab="pricing-html">HTML</button>
+                        <button class="code-tab" data-tab="pricing-css">CSS</button>
+                    </div>
+
+                    <div class="code-container">
+                        <div class="code-block active" id="pricing-html">
+                            <button class="copy-btn-small" data-target="pricing-html">Копировать</button>
+                            <pre><code class="language-html">&lt;section class="pricing"&gt;
+    &lt;div class="container"&gt;
+        &lt;h2&gt;Наши тарифы&lt;/h2&gt;
+        &lt;div class="pricing-grid"&gt;
+            &lt;div class="pricing-card"&gt;
+                &lt;h3&gt;Базовый&lt;/h3&gt;
+                &lt;div class="price"&gt;990₽&lt;span&gt;/мес&lt;/span&gt;&lt;/div&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;✓ 5 страниц сайта&lt;/li&gt;
+                    &lt;li&gt;✓ Контактная форма&lt;/li&gt;
+                    &lt;li&gt;✓ Адаптивный дизайн&lt;/li&gt;
+                    &lt;li&gt;✗ Техподдержка&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;button class="btn"&gt;Выбрать тариф&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="pricing-card popular"&gt;
+                &lt;div class="popular-badge"&gt;ПОПУЛЯРНЫЙ&lt;/div&gt;
+                &lt;h3&gt;Профессиональный&lt;/h3&gt;
+                &lt;div class="price"&gt;1990₽&lt;span&gt;/мес&lt;/span&gt;&lt;/div&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;✓ 15 страниц сайта&lt;/li&gt;
+                    &lt;li&gt;✓ Контактная форма&lt;/li&gt;
+                    &lt;li&gt;✓ Адаптивный дизайн&lt;/li&gt;
+                    &lt;li&gt;✓ Техподдержка 24/7&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;button class="btn"&gt;Выбрать тариф&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                        </div>
+
+                        <div class="code-block" id="pricing-css">
+                            <button class="copy-btn-small" data-target="pricing-css">Копировать</button>
+                            <pre><code class="language-css">.pricing {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.pricing h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    background: white;
+    position: relative;
+}
+
+.pricing-card.popular {
+    border: 2px solid #4361ee;
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4361ee;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.pricing-card h3 {
+    color: #4361ee;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.price span {
+    font-size: 1rem;
+    color: #666;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.pricing-card li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-card button {
+    width: 100%;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>О проекте</h3>
+                <p>SKETHWebCourse - это образовательная платформа для изучения веб-разработки с нуля. Мы предлагаем практические примеры с использованием HTML, CSS и JavaScript.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="support">
+            Сделано при поддержке <span>Crushers</span> и <span>SKETH</span>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

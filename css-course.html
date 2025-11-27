@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полный курс по CSS | SKETHWeb Course</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .content {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .sidebar {
+            flex: 0 0 280px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--dark);
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section {
+            margin-bottom: 50px;
+            scroll-margin-top: 100px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .section h3 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+        }
+
+        .section ul, .section ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background-color: #282c34;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .example {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--light);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .demo-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: white;
+        }
+
+        .demo-element {
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .flex-item {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .grid-item {
+            background-color: var(--secondary);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .transition-demo {
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+        }
+
+        .transition-demo:hover {
+            background-color: var(--accent);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .animation-demo {
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent);
+            border-radius: 5px;
+            margin: 15px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--secondary), #1a1a2e);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        .support {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .support span {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                margin-top: 0;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">SKETHWeb<span>Course</span></div>
+                <h1>Полный курс по CSS</h1>
+                <p>Изучите каскадные таблицы стилей от основ до продвинутых техник</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">SKETHWeb<span>Course</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="html-course.html">Курс HTML</a></li>
+                <li><a href="lesson-js-1.html">Курс JavaScript</a></li>
+                <li><a href="examples.html">Примеры</a></li>
+            </ul>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </a>
+        </div>
+    </nav>
+
+    <div class="container content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Содержание</h3>
+            <ul>
+                <li><a href="#intro" class="active">Введение в CSS</a></li>
+                <li><a href="#syntax">Синтаксис и подключение</a></li>
+                <li><a href="#selectors">Селекторы</a></li>
+                <li><a href="#colors">Цвета и фон</a></li>
+                <li><a href="#text">Текст и шрифты</a></li>
+                <li><a href="#box-model">Блочная модель</a></li>
+                <li><a href="#position">Позиционирование</a></li>
+                <li><a href="#flexbox">Flexbox</a></li>
+                <li><a href="#grid">CSS Grid</a></li>
+                <li><a href="#responsive">Адаптивный дизайн</a></li>
+                <li><a href="#transitions">Переходы</a></li>
+                <li><a href="#animations">Анимации</a></li>
+                <li><a href="#variables">CSS переменные</a></li>
+                <li><a href="#conclusion">Заключение</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section id="intro" class="section">
+                <h2>Введение в CSS</h2>
+                <p>CSS (Cascading Style Sheets) - это язык стилей, который используется для описания внешнего вида документов, написанных на HTML. CSS позволяет контролировать макет, цвета, шрифты и другие аспекты визуального представления веб-страниц.</p>
+
+                <div class="note">
+                    <h4>Важно!</h4>
+                    <p>CSS отделяет содержание (HTML) от представления (стили), что делает код более чистым и удобным для поддержки.</p>
+                </div>
+
+                <h3>Что можно делать с помощью CSS?</h3>
+                <ul>
+                    <li>Изменять цвета текста и фона</li>
+                    <li>Настраивать шрифты и их размеры</li>
+                    <li>Создавать сложные макеты страниц</li>
+                    <li>Добавлять анимации и переходы</li>
+                    <li>Создавать адаптивные дизайны для разных устройств</li>
+                    <li>И многое другое!</li>
+                </ul>
+            </section>
+
+            <section id="syntax" class="section">
+                <h2>Синтаксис и подключение CSS</h2>
+                <p>CSS состоит из набора правил, каждое из которых содержит селектор и блок объявлений.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-css">/* Это комментарий в CSS */
+селектор {
+    свойство: значение;
+    другое-свойство: значение;
+}</code></pre>
+                </div>
+
+                <h3>Способы подключения CSS</h3>
+
+                <h4>1. Встроенные стили (inline)</h4>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div style="color: blue; font-size: 16px;"&gt;Текст с встроенными стилями&lt;/div&gt;</code></pre>
+                </div>
+
+                <h4>2. Внутренние стили (internal)</h4>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;head&gt;
+    &lt;style&gt;
+        body {
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: navy;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                </div>
+
+                <h4>3. Внешние стили (external)</h4>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;head&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4>Рекомендация</h4>
+                    <p>Используйте внешние стили для больших проектов - это упрощает поддержку и позволяет переиспользовать стили на разных страницах.</p>
+                </div>
+            </section>
+
+            <section id="selectors" class="section">
+                <h2>Селекторы</h2>
+                <p>Селекторы определяют, к каким элементам HTML будут применены стили.</p>
+
+                <h3>Основные типы селекторов</h3>
+
+                <h4>1. Селектор по тегу</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">p {
+    color: red;
+}</code></pre>
+                </div>
+
+                <h4>2. Селектор по классу</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">.my-class {
+    font-weight: bold;
+}</code></pre>
+                </div>
+
+                <h4>3. Селектор по ID</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">#my-id {
+    background-color: yellow;
+}</code></pre>
+                </div>
+
+                <h4>4. Универсальный селектор</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">* {
+    margin: 0;
+    padding: 0;
+}</code></pre>
+                </div>
+
+                <h3>Комбинированные селекторы</h3>
+
+                <h4>1. Группировка селекторов</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">h1, h2, h3 {
+    font-family: Arial, sans-serif;
+}</code></pre>
+                </div>
+
+                <h4>2. Вложенные селекторы</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">div p {
+    color: blue;
+}</code></pre>
+                </div>
+
+                <h4>3. Дочерние селекторы</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">div > p {
+    font-weight: bold;
+}</code></pre>
+                </div>
+
+                <h4>4. Соседние селекторы</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">h1 + p {
+    margin-top: 0;
+}</code></pre>
+                </div>
+
+                <h3>Псевдоклассы и псевдоэлементы</h3>
+
+                <h4>Псевдоклассы</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">a:hover {
+    color: red;
+}
+
+li:first-child {
+    font-weight: bold;
+}
+
+input:focus {
+    border-color: blue;
+}</code></pre>
+                </div>
+
+                <h4>Псевдоэлементы</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">p::first-line {
+    font-weight: bold;
+}
+
+p::before {
+    content: "→ ";
+}
+
+p::after {
+    content: " ←";
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="colors" class="section">
+                <h2>Цвета и фон</h2>
+                <p>CSS предоставляет различные способы задания цветов и фоновых изображений.</p>
+
+                <h3>Способы задания цветов</h3>
+
+                <h4>1. Именованные цвета</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">color: red;
+background-color: blue;
+border-color: green;</code></pre>
+                </div>
+
+                <h4>2. HEX-значения</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">color: #ff0000;        /* Красный */
+color: #00ff00;        /* Зеленый */
+color: #0000ff;        /* Синий */
+color: #ffffff;        /* Белый */
+color: #000000;        /* Черный */
+color: #336699;        /* Сине-серый */</code></pre>
+                </div>
+
+                <h4>3. RGB и RGBA</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">color: rgb(255, 0, 0);        /* Красный */
+color: rgba(255, 0, 0, 0.5);  /* Красный с прозрачностью 50% */</code></pre>
+                </div>
+
+                <h4>4. HSL и HSLA</h4>
+                <div class="code-block">
+                    <pre><code class="language-css">color: hsl(0, 100%, 50%);        /* Красный */
+color: hsla(0, 100%, 50%, 0.5);  /* Красный с прозрачностью 50% */</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Примеры цветов:</h4>
+                    <div class="color-box" style="background-color: red;"></div>
+                    <div class="color-box" style="background-color: #00ff00;"></div>
+                    <div class="color-box" style="background-color: rgb(0, 0, 255);"></div>
+                    <div class="color-box" style="background-color: rgba(255, 0, 0, 0.5);"></div>
+                    <div class="color-box" style="background-color: hsl(240, 100%, 50%);"></div>
+                    <div class="color-box" style="background-color: hsla(240, 100%, 50%, 0.5);"></div>
+                </div>
+
+                <h3>Фоновые свойства</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.element {
+    background-color: #f0f0f0;
+    background-image: url('image.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* Или сокращенная запись: */
+    background: #f0f0f0 url('image.jpg') no-repeat center / cover;
+}</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Пример фона:</h4>
+                    <div style="height: 150px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                        Градиентный фон
+                    </div>
+                </div>
+            </section>
+
+            <section id="text" class="section">
+                <h2>Текст и шрифты</h2>
+                <p>CSS предоставляет множество свойств для оформления текста.</p>
+
+                <h3>Свойства шрифтов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: normal; /* или bold, 100-900 */
+    font-style: normal; /* или italic, oblique */
+    line-height: 1.5;
+}</code></pre>
+                </div>
+
+                <h3>Свойства текста</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">p {
+    color: #333;
+    text-align: left; /* или center, right, justify */
+    text-decoration: none; /* или underline, overline, line-through */
+    text-transform: none; /* или uppercase, lowercase, capitalize */
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Примеры оформления текста:</h4>
+                    <p style="font-family: Arial, sans-serif; font-size: 18px;">Обычный текст</p>
+                    <p style="font-weight: bold;">Жирный текст</p>
+                    <p style="font-style: italic;">Курсивный текст</p>
+                    <p style="text-align: center;">Выровненный по центру текст</p>
+                    <p style="text-decoration: underline;">Подчеркнутый текст</p>
+                    <p style="text-transform: uppercase;">текст в верхнем регистре</p>
+                    <p style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Текст с тенью</p>
+                </div>
+
+                <h3>Подключение веб-шрифтов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">/* Подключение через @import */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Или через @font-face */
+@font-face {
+    font-family: 'MyFont';
+    src: url('myfont.woff2') format('woff2'),
+         url('myfont.woff') format('woff');
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="box-model" class="section">
+                <h2>Блочная модель</h2>
+                <p>Каждый элемент в CSS представлен в виде прямоугольного блока, который состоит из содержимого, отступов, границ и внешних отступов.</p>
+
+                <div class="demo-box">
+                    <div style="width: 200px; height: 100px; padding: 20px; border: 5px solid #4361ee; margin: 10px; background-color: #f0f0f0;">
+                        Содержимое
+                    </div>
+                    <p style="text-align: center; margin-top: 10px;">Пример блочной модели</p>
+                </div>
+
+                <h3>Свойства блочной модели</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.box {
+    width: 300px;
+    height: 200px;
+    padding: 20px;
+    border: 2px solid #333;
+    margin: 10px;
+    box-sizing: border-box; /* или content-box */
+}</code></pre>
+                </div>
+
+                <h3>Типы отображения элементов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.block {
+    display: block; /* Занимает всю ширину, начинается с новой строки */
+}
+
+.inline {
+    display: inline; /* Занимает только необходимую ширину */
+}
+
+.inline-block {
+    display: inline-block; /* Как inline, но можно задавать ширину и высоту */
+}
+
+.none {
+    display: none; /* Полностью скрывает элемент */
+}</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Примеры display:</h4>
+                    <div style="display: block; background: #4361ee; color: white; padding: 10px; margin: 5px 0;">Блочный элемент</div>
+                    <span style="display: inline; background: #f72585; color: white; padding: 10px; margin: 0 5px;">Строчный элемент 1</span>
+                    <span style="display: inline; background: #f72585; color: white; padding: 10px; margin: 0 5px;">Строчный элемент 2</span>
+                    <div style="display: inline-block; width: 100px; background: #3a0ca3; color: white; padding: 10px; margin: 5px;">Inline-block</div>
+                </div>
+            </section>
+
+            <section id="position" class="section">
+                <h2>Позиционирование</h2>
+                <p>Свойство position определяет, как элемент позиционируется на странице.</p>
+
+                <h3>Типы позиционирования</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.static {
+    position: static; /* По умолчанию */
+}
+
+.relative {
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+
+.absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+}</code></pre>
+                </div>
+
+                <div class="demo-box" style="position: relative; height: 200px; background: #f0f0f0;">
+                    <h4>Примеры позиционирования:</h4>
+                    <div style="position: static; background: #4361ee; color: white; padding: 10px; margin: 5px;">Static</div>
+                    <div style="position: relative; top: 10px; left: 20px; background: #f72585; color: white; padding: 10px; margin: 5px;">Relative</div>
+                    <div style="position: absolute; top: 50px; right: 20px; background: #3a0ca3; color: white; padding: 10px;">Absolute</div>
+                </div>
+
+                <h3>Свойства z-index</h3>
+                <p>Свойство z-index контролирует порядок наложения элементов друг на друга.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.element1 {
+    position: relative;
+    z-index: 1;
+}
+
+.element2 {
+    position: relative;
+    z-index: 2; /* Будет поверх element1 */
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="flexbox" class="section">
+                <h2>Flexbox</h2>
+                <p>Flexbox - это модуль макета, который упрощает создание гибких и адаптивных макетов.</p>
+
+                <h3>Основные понятия Flexbox</h3>
+                <ul>
+                    <li><strong>Flex container</strong> - родительский элемент с display: flex</li>
+                    <li><strong>Flex items</strong> - дочерние элементы контейнера</li>
+                    <li><strong>Main axis</strong> - основная ось (горизонтальная по умолчанию)</li>
+                    <li><strong>Cross axis</strong> - поперечная ось (вертикальная по умолчанию)</li>
+                </ul>
+
+                <h3>Свойства контейнера</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.container {
+    display: flex;
+    flex-direction: row; /* или column, row-reverse, column-reverse */
+    flex-wrap: nowrap; /* или wrap, wrap-reverse */
+    justify-content: flex-start; /* или center, flex-end, space-between, space-around */
+    align-items: stretch; /* или flex-start, center, flex-end, baseline */
+    align-content: stretch; /* Для многострочных контейнеров */
+}</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Пример Flexbox:</h4>
+                    <div class="flex-container">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                </div>
+
+                <h3>Свойства элементов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.item {
+    order: 0; /* Порядок отображения */
+    flex-grow: 0; /* Может ли элемент увеличиваться */
+    flex-shrink: 1; /* Может ли элемент уменьшаться */
+    flex-basis: auto; /* Исходный размер элемента */
+    align-self: auto; /* Выравнивание отдельного элемента */
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="grid" class="section">
+                <h2>CSS Grid</h2>
+                <p>CSS Grid - это мощная система для создания двумерных макетов.</p>
+
+                <h3>Основные понятия Grid</h3>
+                <ul>
+                    <li><strong>Grid container</strong> - родительский элемент с display: grid</li>
+                    <li><strong>Grid items</strong> - дочерние элементы контейнера</li>
+                    <li><strong>Grid lines</strong> - линии, разделяющие сетку</li>
+                    <li><strong>Grid tracks</strong> - пространство между двумя линиями (строки или столбцы)</li>
+                    <li><strong>Grid cells</strong> - отдельные ячейки сетки</li>
+                    <li><strong>Grid areas</strong> - прямоугольные области, состоящие из нескольких ячеек</li>
+                </ul>
+
+                <h3>Свойства контейнера</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.container {
+    display: grid;
+    grid-template-columns: 100px 1fr 2fr; /* Определяет столбцы */
+    grid-template-rows: 100px 200px; /* Определяет строки */
+    grid-template-areas:
+        "header header header"
+        "sidebar content content"
+        "footer footer footer";
+    gap: 10px; /* Расстояние между элементами */
+    justify-items: stretch; /* Выравнивание по горизонтали */
+    align-items: stretch; /* Выравнивание по вертикали */
+}</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Пример Grid:</h4>
+                    <div class="grid-container">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                    </div>
+                </div>
+
+                <h3>Свойства элементов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.item {
+    grid-column-start: 1; /* Начальная линия столбца */
+    grid-column-end: 3; /* Конечная линия столбца */
+    grid-row-start: 1; /* Начальная линия строки */
+    grid-row-end: 2; /* Конечная линия строки */
+    /* Или сокращенная запись: */
+    grid-area: 1 / 1 / 2 / 3; /* row-start / column-start / row-end / column-end */
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="responsive" class="section">
+                <h2>Адаптивный дизайн</h2>
+                <p>Адаптивный дизайн позволяет создавать сайты, которые хорошо выглядят на всех устройствах.</p>
+
+                <h3>Viewport</h3>
+                <p>Метатег viewport необходим для корректного отображения на мобильных устройствах.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+                </div>
+
+                <h3>Медиа-запросы</h3>
+                <p>Медиа-запросы позволяют применять стили в зависимости от характеристик устройства.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-css">/* Для экранов шириной до 768px */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+/* Для экранов шириной от 769px до 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* Для экранов с ориентацией landscape */
+@media (orientation: landscape) {
+    .header {
+        height: 80px;
+    }
+}</code></pre>
+                </div>
+
+                <h3>Относительные единицы измерения</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.responsive {
+    width: 100%; /* Проценты от родительского элемента */
+    font-size: 2rem; /* Относительно корневого элемента */
+    padding: 2em; /* Относительно размера шрифта элемента */
+    margin: 5vw; /* 5% от ширины viewport */
+    height: 50vh; /* 50% от высоты viewport */
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="transitions" class="section">
+                <h2>Переходы (Transitions)</h2>
+                <p>Переходы позволяют плавно изменять значения свойств в течение определенного времени.</p>
+
+                <h3>Свойства переходов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.element {
+    transition-property: all; /* Какие свойства анимировать */
+    transition-duration: 0.3s; /* Длительность анимации */
+    transition-timing-function: ease; /* Функция времени */
+    transition-delay: 0s; /* Задержка перед началом */
+    /* Сокращенная запись: */
+    transition: all 0.3s ease 0s;
+}</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Пример перехода:</h4>
+                    <div class="transition-demo"></div>
+                    <p>Наведите курсор на квадрат</p>
+                </div>
+
+                <h3>Функции времени (timing functions)</h3>
+                <ul>
+                    <li><strong>ease</strong> - медленно начинается, быстро в середине, медленно заканчивается</li>
+                    <li><strong>linear</strong> - постоянная скорость</li>
+                    <li><strong>ease-in</strong> - медленно начинается</li>
+                    <li><strong>ease-out</strong> - медленно заканчивается</li>
+                    <li><strong>ease-in-out</strong> - медленно начинается и заканчивается</li>
+                    <li><strong>cubic-bezier()</strong> - пользовательская функция</li>
+                </ul>
+            </section>
+
+            <section id="animations" class="section">
+                <h2>Анимации</h2>
+                <p>Анимации позволяют создавать сложные последовательности изменений свойств.</p>
+
+                <h3>Определение анимации</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}</code></pre>
+                </div>
+
+                <h3>Применение анимации</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.element {
+    animation-name: pulse; /* Имя анимации */
+    animation-duration: 2s; /* Длительность */
+    animation-timing-function: ease-in-out; /* Функция времени */
+    animation-delay: 0s; /* Задержка */
+    animation-iteration-count: infinite; /* Количество повторений */
+    animation-direction: normal; /* Направление */
+    animation-fill-mode: none; /* Состояние до и после */
+    animation-play-state: running; /* Состояние воспроизведения */
+    /* Сокращенная запись: */
+    animation: pulse 2s ease-in-out 0s infinite normal none running;
+}</code></pre>
+                </div>
+
+                <div class="demo-box">
+                    <h4>Пример анимации:</h4>
+                    <div class="animation-demo"></div>
+                    <p>Пульсирующий квадрат</p>
+                </div>
+            </section>
+
+            <section id="variables" class="section">
+                <h2>CSS переменные</h2>
+                <p>CSS переменные (кастомные свойства) позволяют хранить значения для многократного использования.</p>
+
+                <h3>Определение переменных</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3a0ca3;
+    --font-size: 16px;
+    --spacing: 1rem;
+}</code></pre>
+                </div>
+
+                <h3>Использование переменных</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-css">.element {
+    color: var(--primary-color);
+    font-size: var(--font-size);
+    margin: var(--spacing);
+    /* Значение по умолчанию: */
+    background-color: var(--bg-color, #f0f0f0);
+}</code></pre>
+                </div>
+
+                <h3>Изменение переменных через JavaScript</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Получить значение переменной
+const primaryColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--primary-color');
+
+// Установить новое значение
+document.documentElement.style.setProperty('--primary-color', '#ff0000');</code></pre>
+                </div>
+            </section>
+
+            <section id="conclusion" class="section">
+                <h2>Заключение</h2>
+                <p>Поздравляем! Вы изучили основы CSS и готовы создавать красивые и современные веб-сайты.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О проекте</h3>
+                    <p>SKETHWebCourse - это образовательная платформа для изучения веб-разработки с нуля. Мы предлагаем лекционные и практические уроки с примерами проектов для закрепления знаний.</p>
+                </div>
+            </div>
+            <div class="support">
+                Сделано при поддержке <span>Crushers</span> и <span>SKETH</span>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    document.querySelectorAll('.sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.sidebar a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

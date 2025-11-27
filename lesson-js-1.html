@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полный курс по JavaScript | SKETHWeb Course</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .content {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .sidebar {
+            flex: 0 0 280px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--dark);
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section {
+            margin-bottom: 50px;
+            scroll-margin-top: 100px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .section h3 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+        }
+
+        .section ul, .section ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background-color: #282c34;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .example {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--light);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .demo-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: white;
+        }
+
+        .demo-element {
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+
+        .interactive-demo {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .output {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            min-height: 50px;
+        }
+
+        .code-editor {
+            background-color: #282c34;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .code-editor textarea {
+            width: 100%;
+            height: 200px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: none;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        .run-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .run-btn:hover {
+            background-color: #b5179e;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--secondary), #1a1a2e);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        .support {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .support span {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                margin-top: 0;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">SKETHWeb<span>Course</span></div>
+                <h1>Полный курс по JavaScript</h1>
+                <p>Изучите язык программирования для веб-разработки от основ до продвинутых концепций</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">SKETHWeb<span>Course</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="html-course.html">Курс HTML</a></li>
+                <li><a href="css-course.html">Курс CSS</a></li>
+                <li><a href="examples.html">Примеры</a></li>
+            </ul>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </a>
+        </div>
+    </nav>
+
+    <div class="container content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Содержание</h3>
+            <ul>
+                <li><a href="#intro" class="active">Введение в JavaScript</a></li>
+                <li><a href="#basics">Основы синтаксиса</a></li>
+                <li><a href="#variables">Переменные и типы данных</a></li>
+                <li><a href="#operators">Операторы</a></li>
+                <li><a href="#functions">Функции</a></li>
+                <li><a href="#objects">Объекты и массивы</a></li>
+                <li><a href="#dom">Работа с DOM</a></li>
+                <li><a href="#events">События</a></li>
+                <li><a href="#async">Асинхронный JavaScript</a></li>
+                <li><a href="#es6">ES6+ возможности</a></li>
+                <li><a href="#conclusion">Заключение</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section id="intro" class="section">
+                <h2>Введение в JavaScript</h2>
+                <p>JavaScript - это язык программирования, который позволяет создавать интерактивные веб-страницы. В отличие от HTML и CSS, JavaScript является полноценным языком программирования.</p>
+
+                <div class="note">
+                    <h4>Важно!</h4>
+                    <p>JavaScript не имеет прямого отношения к Java. Это разные языки с разными возможностями и синтаксисом.</p>
+                </div>
+
+                <h3>Что можно делать с помощью JavaScript?</h3>
+                <ul>
+                    <li>Добавлять интерактивность на веб-страницы</li>
+                    <li>Создавать анимации и динамические эффекты</li>
+                    <li>Обрабатывать пользовательские события (клики, ввод данных)</li>
+                    <li>Работать с данными на стороне клиента</li>
+                    <li>Взаимодействовать с сервером (AJAX)</li>
+                    <li>Создавать веб-приложения и игры</li>
+                </ul>
+
+                <h3>Подключение JavaScript к странице</h3>
+
+                <h4>1. Встроенный скрипт</h4>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;script&gt;
+    // JavaScript код
+    console.log('Привет, мир!');
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <h4>2. Внешний файл</h4>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4>Рекомендация</h4>
+                    <p>Используйте внешние файлы для больших проектов - это упрощает поддержку и позволяет переиспользовать код.</p>
+                </div>
+            </section>
+
+            <section id="basics" class="section">
+                <h2>Основы синтаксиса</h2>
+                <p>Синтаксис JavaScript во многом похож на другие языки программирования, такие как C, Java или C#.</p>
+
+                <h3>Структура кода</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Это однострочный комментарий
+
+/*
+ Это многострочный
+ комментарий
+*/
+
+// Инструкции разделяются точкой с запятой
+let x = 5;
+let y = 10;
+
+// Но точка с запятой не обязательна в большинстве случаев
+let name = "Иван"
+let age = 25</code></pre>
+                </div>
+
+                <h3>Регистрозависимость</h3>
+                <p>JavaScript - регистрозависимый язык. Переменные <code>myVariable</code> и <code>myvariable</code> считаются разными.</p>
+
+                <h3>Блоки кода</h3>
+                <p>Блоки кода ограничиваются фигурными скобками <code>{}</code>.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">{
+    // Это блок кода
+    let message = "Привет";
+    console.log(message);
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="variables" class="section">
+                <h2>Переменные и типы данных</h2>
+                <p>Переменные используются для хранения данных. В JavaScript есть несколько способов объявления переменных.</p>
+
+                <h3>Объявление переменных</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// var - устаревший способ (не рекомендуется)
+var oldVariable = "значение";
+
+// let - современный способ для изменяемых переменных
+let counter = 0;
+
+// const - для констант (неизменяемых значений)
+const PI = 3.14159;</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4>Рекомендация</h4>
+                    <p>Всегда используйте <code>const</code> по умолчанию, и только если переменная будет изменяться - используйте <code>let</code>. Избегайте <code>var</code>.</p>
+                </div>
+
+                <h3>Типы данных</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Примитивные типы
+let string = "Текст";          // Строка
+let number = 42;               // Число
+let boolean = true;            // Логический тип
+let nullValue = null;          // Null
+let undefinedValue;            // Undefined
+let symbol = Symbol("id");     // Символ (ES6)
+
+// Объектные типы
+let object = {                 // Объект
+    name: "Иван",
+    age: 30
+};
+let array = [1, 2, 3];         // Массив
+let func = function() {        // Функция
+    return "Привет";
+};</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>Демонстрация типов данных:</h4>
+                    <button class="btn" onclick="showTypes()">Показать типы данных</button>
+                    <div class="output" id="typesOutput"></div>
+                </div>
+            </section>
+
+            <section id="operators" class="section">
+                <h2>Операторы</h2>
+                <p>Операторы позволяют выполнять операции с переменными и значениями.</p>
+
+                <h3>Арифметические операторы</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">let a = 10, b = 3;
+
+console.log(a + b);   // 13 (сложение)
+console.log(a - b);   // 7 (вычитание)
+console.log(a * b);   // 30 (умножение)
+console.log(a / b);   // 3.333... (деление)
+console.log(a % b);   // 1 (остаток от деления)
+console.log(a ** b);  // 1000 (возведение в степень)
+console.log(++a);     // 11 (инкремент)
+console.log(--b);     // 2 (декремент)</code></pre>
+                </div>
+
+                <h3>Операторы сравнения</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">console.log(5 == "5");    // true (нестрогое равенство)
+console.log(5 === "5");   // false (строгое равенство)
+console.log(5 != "5");    // false (нестрогое неравенство)
+console.log(5 !== "5");   // true (строгое неравенство)
+console.log(5 > 3);       // true
+console.log(5 < 3);       // false
+console.log(5 >= 5);      // true
+console.log(5 <= 3);      // false</code></pre>
+                </div>
+
+                <h3>Логические операторы</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">console.log(true && false);   // false (И)
+console.log(true || false);   // true (ИЛИ)
+console.log(!true);           // false (НЕ)
+
+// Короткое замыкание
+let result = false && someFunction();  // someFunction не выполнится
+let result2 = true || someFunction();  // someFunction не выполнится</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>Калькулятор операторов:</h4>
+                    <input type="number" id="op1" value="10" style="padding: 5px; margin: 5px; width: 60px;">
+                    <select id="operator" style="padding: 5px; margin: 5px;">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">*</option>
+                        <option value="/">/</option>
+                        <option value="%">%</option>
+                        <option value="**">**</option>
+                    </select>
+                    <input type="number" id="op2" value="3" style="padding: 5px; margin: 5px; width: 60px;">
+                    <button class="btn" onclick="calculate()">Вычислить</button>
+                    <div class="output" id="calcOutput">Результат: </div>
+                </div>
+            </section>
+
+            <section id="functions" class="section">
+                <h2>Функции</h2>
+                <p>Функции - это блоки кода, которые можно многократно вызывать с разными параметрами.</p>
+
+                <h3>Объявление функций</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Function Declaration
+function greet(name) {
+    return "Привет, " + name + "!";
+}
+
+// Function Expression
+const multiply = function(a, b) {
+    return a * b;
+};
+
+// Стрелочные функции (ES6)
+const divide = (a, b) => {
+    return a / b;
+};
+
+// Сокращенная форма стрелочных функций
+const square = x => x * x;</code></pre>
+                </div>
+
+                <h3>Параметры и аргументы</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Параметры по умолчанию
+function createUser(name, age = 18) {
+    return {
+        name: name,
+        age: age
+    };
+}
+
+// Rest параметры
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+
+console.log(sum(1, 2, 3, 4, 5)); // 15</code></pre>
+                </div>
+
+                <h3>Замыкания</h3>
+                <p>Замыкания - это функции, которые запоминают свое лексическое окружение.</p>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">function createCounter() {
+    let count = 0;
+
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>Демонстрация функций:</h4>
+                    <input type="text" id="userName" placeholder="Введите имя" style="padding: 5px; margin: 5px;">
+                    <button class="btn" onclick="greetUser()">Поприветствовать</button>
+                    <div class="output" id="greetOutput"></div>
+                </div>
+            </section>
+
+            <section id="objects" class="section">
+                <h2>Объекты и массивы</h2>
+                <p>Объекты и массивы - это сложные структуры данных для хранения коллекций значений.</p>
+
+                <h3>Объекты</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Создание объекта
+const person = {
+    firstName: "Иван",
+    lastName: "Петров",
+    age: 30,
+    hobbies: ["чтение", "программирование"],
+
+    // Метод объекта
+    getFullName: function() {
+        return this.firstName + " " + this.lastName;
+    }
+};
+
+// Доступ к свойствам
+console.log(person.firstName);        // Иван
+console.log(person["lastName"]);      // Петров
+console.log(person.getFullName());    // Иван Петров
+
+// Добавление свойств
+person.email = "ivan@example.com";
+
+// Удаление свойств
+delete person.age;</code></pre>
+                </div>
+
+                <h3>Массивы</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Создание массива
+const fruits = ["яблоко", "банан", "апельсин"];
+
+// Доступ к элементам
+console.log(fruits[0]);   // яблоко
+console.log(fruits[1]);   // банан
+
+// Методы массивов
+fruits.push("груша");     // Добавить в конец
+fruits.pop();             // Удалить последний
+fruits.unshift("киви");   // Добавить в начало
+fruits.shift();           // Удалить первый
+
+// Итерация по массиву
+fruits.forEach(fruit => {
+    console.log(fruit);
+});
+
+// Функциональные методы
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);          // [2, 4, 6, 8, 10]
+const even = numbers.filter(n => n % 2 === 0);    // [2, 4]
+const sum = numbers.reduce((acc, n) => acc + n, 0); // 15</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>Работа с массивом:</h4>
+                    <button class="btn" onclick="addToArray()">Добавить элемент</button>
+                    <button class="btn" onclick="removeFromArray()">Удалить элемент</button>
+                    <button class="btn" onclick="showArray()">Показать массив</button>
+                    <div class="output" id="arrayOutput">Массив: []</div>
+                </div>
+            </section>
+
+            <section id="dom" class="section">
+                <h2>Работа с DOM</h2>
+                <p>DOM (Document Object Model) - это программный интерфейс для работы с HTML-документами.</p>
+
+                <h3>Поиск элементов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Поиск одного элемента
+const header = document.getElementById("header");
+const firstPara = document.querySelector("p");
+
+// Поиск нескольких элементов
+const allDivs = document.getElementsByTagName("div");
+const buttons = document.querySelectorAll(".btn");
+
+// Поиск по классу
+const elements = document.getElementsByClassName("my-class");</code></pre>
+                </div>
+
+                <h3>Изменение содержимого</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">const element = document.getElementById("myElement");
+
+// Изменение текста
+element.textContent = "Новый текст";
+element.innerText = "Другой текст";
+
+// Изменение HTML
+element.innerHTML = "&lt;strong&gt;Жирный текст&lt;/strong&gt;";
+
+// Изменение атрибутов
+element.setAttribute("class", "new-class");
+element.classList.add("active");
+element.classList.remove("old-class");
+element.classList.toggle("visible");</code></pre>
+                </div>
+
+                <h3>Создание и удаление элементов</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Создание элемента
+const newDiv = document.createElement("div");
+newDiv.textContent = "Новый div";
+
+// Добавление в DOM
+document.body.appendChild(newDiv);
+parentElement.insertBefore(newDiv, referenceElement);
+
+// Удаление элемента
+element.remove();
+parentElement.removeChild(childElement);</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>Манипуляция DOM:</h4>
+                    <button class="btn" onclick="createElement()">Создать элемент</button>
+                    <button class="btn" onclick="changeColor()">Изменить цвет</button>
+                    <button class="btn" onclick="removeLast()">Удалить последний</button>
+                    <div id="domDemo" style="min-height: 100px; border: 1px dashed #ccc; padding: 10px; margin: 10px 0;">
+                        <p>Здесь будут появляться новые элементы</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="events" class="section">
+                <h2>События</h2>
+                <p>События позволяют реагировать на действия пользователя и другие происшествия.</p>
+
+                <h3>Добавление обработчиков событий</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Способ 1: через атрибут HTML
+// &lt;button onclick="handleClick()"&gt;Клик&lt;/button&gt;
+
+// Способ 2: через свойство
+button.onclick = function() {
+    console.log("Клик!");
+};
+
+// Способ 3: через addEventListener (рекомендуется)
+button.addEventListener("click", function(event) {
+    console.log("Клик!", event);
+});
+
+// Удаление обработчика
+button.removeEventListener("click", handlerFunction);</code></pre>
+                </div>
+
+                <h3>Типы событий</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// События мыши
+element.addEventListener("click", handler);
+element.addEventListener("dblclick", handler);
+element.addEventListener("mouseover", handler);
+element.addEventListener("mouseout", handler);
+
+// События клавиатуры
+document.addEventListener("keydown", handler);
+document.addEventListener("keyup", handler);
+
+// События формы
+form.addEventListener("submit", handler);
+input.addEventListener("change", handler);
+input.addEventListener("input", handler);
+
+// Другие события
+window.addEventListener("load", handler);
+window.addEventListener("resize", handler);
+window.addEventListener("scroll", handler);</code></pre>
+                </div>
+
+                <h3>Объект события</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">element.addEventListener("click", function(event) {
+    console.log(event.type);        // "click"
+    console.log(event.target);      // Элемент, на котором произошло событие
+    console.log(event.clientX);     // Координата X курсора
+    console.log(event.clientY);     // Координата Y курсора
+    console.log(event.key);         // Нажатая клавиша (для keyboard events)
+
+    // Предотвращение стандартного поведения
+    event.preventDefault();
+
+    // Остановка всплытия
+    event.stopPropagation();
+});</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>Демонстрация событий:</h4>
+                    <div id="eventDemo" style="width: 200px; height: 100px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; margin: 10px 0; border-radius: 5px; cursor: pointer;">
+                        Кликни меня!
+                    </div>
+                    <p>Координаты: <span id="coords">0, 0</span></p>
+                    <p>Счетчик кликов: <span id="clickCount">0</span></p>
+                </div>
+            </section>
+
+            <section id="async" class="section">
+                <h2>Асинхронный JavaScript</h2>
+                <p>Асинхронное программирование позволяет выполнять операции без блокировки основного потока.</p>
+
+                <h3>Callback функции</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">function loadData(callback) {
+    setTimeout(() => {
+        const data = { name: "Иван", age: 30 };
+        callback(data);
+    }, 1000);
+}
+
+loadData(function(result) {
+    console.log(result); // { name: "Иван", age: 30 }
+});</code></pre>
+                </div>
+
+                <h3>Promises (Обещания)</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">function loadData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.5;
+            if (success) {
+                resolve({ name: "Иван", age: 30 });
+            } else {
+                reject("Ошибка загрузки");
+            }
+        }, 1000);
+    });
+}
+
+loadData()
+    .then(data => {
+        console.log("Данные:", data);
+    })
+    .catch(error => {
+        console.error("Ошибка:", error);
+    });</code></pre>
+                </div>
+
+                <h3>Async/Await</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">async function loadUserData() {
+    try {
+        const response = await fetch('https://api.example.com/user');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Ошибка:", error);
+    }
+}
+
+// Использование
+loadUserData().then(user => {
+    console.log(user);
+});</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>Демонстрация асинхронности:</h4>
+                    <button class="btn" onclick="startAsyncDemo()">Запустить асинхронную операцию</button>
+                    <div class="output" id="asyncOutput"></div>
+                </div>
+            </section>
+
+            <section id="es6" class="section">
+                <h2>ES6+ возможности</h2>
+                <p>Современный JavaScript (ES6 и новее) предоставляет множество полезных возможностей.</p>
+
+                <h3>Деструктуризация</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Деструктуризация объектов
+const person = { name: "Иван", age: 30, city: "Москва" };
+const { name, age } = person;
+console.log(name); // Иван
+console.log(age);  // 30
+
+// Деструктуризация массивов
+const numbers = [1, 2, 3, 4, 5];
+const [first, second, ...rest] = numbers;
+console.log(first); // 1
+console.log(second); // 2
+console.log(rest);  // [3, 4, 5]</code></pre>
+                </div>
+
+                <h3>Spread и Rest операторы</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Spread оператор
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2]; // [1, 2, 3, 4, 5, 6]
+
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const merged = { ...obj1, ...obj2 }; // { a: 1, b: 2, c: 3, d: 4 }
+
+// Rest параметры
+function sum(...numbers) {
+    return numbers.reduce((acc, num) => acc + num, 0);
+}</code></pre>
+                </div>
+
+                <h3>Шаблонные строки</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">const name = "Иван";
+const age = 30;
+
+// Старый способ
+const message1 = "Привет, " + name + "! Тебе " + age + " лет.";
+
+// Новый способ (шаблонные строки)
+const message2 = `Привет, ${name}! Тебе ${age} лет.`;
+
+// Многострочные строки
+const multiline = `
+    Это
+    многострочная
+    строка
+`;</code></pre>
+                </div>
+
+                <h3>Модули</h3>
+
+                <div class="code-block">
+                    <pre><code class="language-javascript">// math.js
+export const PI = 3.14159;
+export function square(x) {
+    return x * x;
+}
+export default function multiply(a, b) {
+    return a * b;
+}
+
+// main.js
+import multiply, { PI, square } from './math.js';
+console.log(multiply(2, 3)); // 6
+console.log(PI);             // 3.14159</code></pre>
+                </div>
+            </section>
+
+            <section id="conclusion" class="section">
+                <h2>Заключение</h2>
+                <p>Поздравляем! Вы изучили основы JavaScript и готовы создавать интерактивные веб-приложения.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О проекте</h3>
+                    <p>SKETHWebCourse - это образовательная платформа для изучения веб-разработки с нуля. Мы предлагаем лекционные и практические уроки с примерами проектов для закрепления знаний.</p>
+                </div>
+            </div>
+            <div class="support">
+                Сделано при поддержке <span>Crushers</span> и <span>SKETH</span>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигация по странице
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    document.querySelectorAll('.sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.sidebar a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Демонстрационные функции
+        function showTypes() {
+            const types = [
+                { type: "string", value: "Привет, мир!" },
+                { type: "number", value: 42 },
+                { type: "boolean", value: true },
+                { type: "null", value: null },
+                { type: "undefined", value: undefined },
+                { type: "object", value: { name: "Иван", age: 30 } },
+                { type: "array", value: [1, 2, 3] },
+                { type: "function", value: function() { return "Я функция"; } }
+            ];
+
+            let output = "";
+            types.forEach(item => {
+                output += `<strong>${item.type}:</strong> ${JSON.stringify(item.value)}<br>`;
+            });
+
+            document.getElementById('typesOutput').innerHTML = output;
+        }
+
+        function calculate() {
+            const op1 = parseFloat(document.getElementById('op1').value);
+            const op2 = parseFloat(document.getElementById('op2').value);
+            const operator = document.getElementById('operator').value;
+
+            let result;
+            switch(operator) {
+                case '+': result = op1 + op2; break;
+                case '-': result = op1 - op2; break;
+                case '*': result = op1 * op2; break;
+                case '/': result = op1 / op2; break;
+                case '%': result = op1 % op2; break;
+                case '**': result = Math.pow(op1, op2); break;
+                default: result = "Неизвестная операция";
+            }
+
+            document.getElementById('calcOutput').textContent = `Результат: ${result}`;
+        }
+
+        function greetUser() {
+            const name = document.getElementById('userName').value || "Незнакомец";
+            document.getElementById('greetOutput').textContent = `Привет, ${name}! Рад тебя видеть!`;
+        }
+
+        // Работа с массивом
+        let demoArray = [];
+
+        function addToArray() {
+            const newItem = prompt("Введите элемент для добавления в массив:");
+            if (newItem) {
+                demoArray.push(newItem);
+                showArray();
+            }
+        }
+
+        function removeFromArray() {
+            if (demoArray.length > 0) {
+                demoArray.pop();
+                showArray();
+            } else {
+                alert("Массив пуст!");
+            }
+        }
+
+        function showArray() {
+            document.getElementById('arrayOutput').textContent = `Массив: [${demoArray.join(', ')}]`;
+        }
+
+        // Работа с DOM
+        let elementCounter = 0;
+
+        function createElement() {
+            elementCounter++;
+            const newElement = document.createElement('div');
+            newElement.className = 'demo-element';
+            newElement.textContent = `Новый элемент #${elementCounter}`;
+            newElement.style.backgroundColor = getRandomColor();
+            document.getElementById('domDemo').appendChild(newElement);
+        }
+
+        function changeColor() {
+            const elements = document.querySelectorAll('#domDemo .demo-element');
+            elements.forEach(element => {
+                element.style.backgroundColor = getRandomColor();
+            });
+        }
+
+        function removeLast() {
+            const demoArea = document.getElementById('domDemo');
+            if (demoArea.children.length > 1) { // Оставляем первый элемент (инструкцию)
+                demoArea.removeChild(demoArea.lastChild);
+                elementCounter--;
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // События
+        let clickCount = 0;
+        const eventDemo = document.getElementById('eventDemo');
+        const coordsDisplay = document.getElementById('coords');
+        const clickCountDisplay = document.getElementById('clickCount');
+
+        eventDemo.addEventListener('click', function(event) {
+            clickCount++;
+            clickCountDisplay.textContent = clickCount;
+
+            // Анимация клика
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        eventDemo.addEventListener('mousemove', function(event) {
+            const rect = this.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            coordsDisplay.textContent = `${Math.round(x)}, ${Math.round(y)}`;
+        });
+
+        // Асинхронная демонстрация
+        function startAsyncDemo() {
+            const output = document.getElementById('asyncOutput');
+            output.innerHTML = "Начало операции...<br>";
+
+            // Имитация асинхронной операции
+            setTimeout(() => {
+                output.innerHTML += "Первый шаг завершен<br>";
+
+                setTimeout(() => {
+                    output.innerHTML += "Второй шаг завершен<br>";
+
+                    setTimeout(() => {
+                        output.innerHTML += "Операция успешно завершена! ✅";
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
+
+        // Таймер
+        let timerInterval;
+        let timerValue = 10;
+
+        function startTimer() {
+            timerValue = parseInt(document.getElementById('timerInput').value) || 10;
+            document.getElementById('timerOutput').textContent = timerValue;
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timerValue--;
+                document.getElementById('timerOutput').textContent = timerValue;
+
+                if (timerValue <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timerOutput').textContent = "Время вышло!";
+                    document.getElementById('timerOutput').style.color = 'red';
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerValue = parseInt(document.getElementById('timerInput').value) || 10;
+            document.getElementById('timerOutput').textContent = timerValue;
+            document.getElementById('timerOutput').style.color = 'inherit';
+        }
+
+        // Список задач
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+
+            if (taskText) {
+                const taskList = document.getElementById('taskList');
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    ${taskText}
+                    <button onclick="this.parentElement.remove()" style="margin-left: 10px; background: var(--accent); color: white; border: none; border-radius: 3px; padding: 2px 8px; cursor: pointer;">×</button>
+                `;
+                taskList.appendChild(li);
+                taskInput.value = '';
+            }
+        }
+
+        // Редактор кода
+        function runCode() {
+            const code = document.getElementById('codeEditor').value;
+            const output = document.getElementById('codeOutput');
+
+            try {
+                // Сохраняем оригинальный console.log
+                const originalConsoleLog = console.log;
+                let logOutput = "";
+
+                // Перехватываем console.log
+                console.log = function(...args) {
+                    logOutput += args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+                    ).join(' ') + '\n';
+                    originalConsoleLog.apply(console, args);
+                };
+
+                // Выполняем код
+                const result = eval(code);
+
+                // Восстанавливаем console.log
+                console.log = originalConsoleLog;
+
+                // Показываем результат
+                if (result !== undefined) {
+                    output.textContent = logOutput + "Результат: " +
+                        (typeof result === 'object' ? JSON.stringify(result) : String(result));
+                } else {
+                    output.textContent = logOutput || "Код выполнен (нет возвращаемого значения)";
+                }
+
+                output.style.color = 'black';
+            } catch (error) {
+                output.textContent = "Ошибка: " + error.message;
+                output.style.color = 'red';
+            }
+        }
+
+        // Добавляем обработчик Enter для поля ввода задач
+        document.getElementById('taskInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+    </script>
+</body>
+</html>

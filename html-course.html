@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лекция по HTML</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .content {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .sidebar {
+            flex: 0 0 280px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--dark);
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section {
+            margin-bottom: 50px;
+            scroll-margin-top: 100px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .section h3 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+        }
+
+        .section ul, .section ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background-color: #282c34;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .example {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--light);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--secondary), #1a1a2e);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        .support {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .support span {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                margin-top: 0;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">SKETHWeb<span>Course</span></div>
+                <h1>Полная лекция по HTML</h1>
+                <p>Изучите все основные элементы HTML, их назначение и правильное использование</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">SKETHWeb<span>Course</span></div>
+            </ul>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </a>
+        </div>
+    </nav>
+
+    <div class="container content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Содержание</h3>
+            <ul>
+                <li><a href="#intro" class="active">Введение в HTML</a></li>
+                <li><a href="#structure">Структура документа</a></li>
+                <li><a href="#text">Текстовые элементы</a></li>
+                <li><a href="#lists">Списки</a></li>
+                <li><a href="#links">Ссылки</a></li>
+                <li><a href="#images">Изображения</a></li>
+                <li><a href="#tables">Таблицы</a></li>
+                <li><a href="#forms">Формы</a></li>
+                <li><a href="#semantic">Семантические элементы</a></li>
+                <li><a href="#file">Файлы и их подключение</a></li>
+                <li><a href="#conclusion">Заключение</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section id="intro" class="section">
+                <h2>Введение в HTML</h2>
+                <p>HTML (HyperText Markup Language) - это стандартный язык разметки для создания веб-страниц. Он определяет структуру и содержание веб-страницы с помощью различных элементов и тегов.</p>
+                
+                <div class="note">
+                    <h4>Важно!</h4>
+                    <p>HTML не является языком программирования. Это язык разметки, который сообщает браузеру, как отображать контент.</p>
+                    <p>По этой причине вам не стоит говорить что вы "програмист" если изучили лишь HTML</p>
+                </div>
+                <ul>
+                    <p>За счет HTML вы сможете указать какие объекты должны быть на странице: кнопки, текст, формы и так далее. HTML лишь позволит расставить все объекты и по началу они будут выглядеть не особо красиво. </p>
+                    <p>Тут вступает в силу CSS. Он даст вам возможность указать стили для любого HTML объекта. При помощи CSS и HTML вы уже сможете делать красивую разметку веб-сайтов. Ваши сайты будут ничем не хуже, чем полноценные веб проекты, что вы видите ежедневно на тысячах сайтов.</p>
+                    <p>В то же время, HTML и CSS, ни дает никакой функциональности. У вас будет сайт, он будет красивый, но без функций. По этой причине вам стоит ещё обязательно изучить JavaScript. Он позволит создавать пользовательские функции, что выполняются в браузере и для их выполнения не требуется перезагрузка страницы.</p>
+                </ul>
+
+
+                <h3>Создание html файлов</h3>
+                <ul>
+                    <p>При создании HTML файла обязательно указывать расширение файла, как: .html. Создав файл с таким расширением вы сможете открыть его через любой веб браузер. Некоторые разработчики указывают расширение .htm, что тоже является верным.</p>
+                    <p>Главная страница обычно всегда обозначается как index.html или index.htm</p>
+                    <p>Чтобы открыть HTML файл в браузере достаточно два раза нажать на него. После этого файл будет открыт в вашем браузере по умолчанию. Весь код из HTML файла будет обработан и показан на странице в браузере</p>
+                </ul>
+
+                <h3>Front-end и Back-end</h3>
+                <ul>
+                    <p>При создании веб-сайта всегда есть две стороны: Front-end и Back-end.</p>
+                    <li>Front-end – это понятие, что описывает разработку внешнего вида сайта.</li>
+                    <li>Back-end – это второе понятие, что описывает разработку серверной части сайта.</li>
+                </ul>
+
+                        <div class="note">
+                    <h4>Важно!</h4>
+                    <p>В данном курсе мы будет рамастривать именно Front-end разработку</p>
+                        </div>
+
+                <h3>Основные понятия</h3>
+                <ul>
+                    <li><strong>Тег (Tag)</strong> - основной строительный блок HTML, заключенный в угловые скобки (< >)</li>
+                    <li><strong>Элемент (Element)</strong> - открывающий тег, содержимое и закрывающий тег</li>
+                    <li><strong>Атрибут (Attribute)</strong> - дополнительная информация об элементе</li>
+                </ul>
+            </section>
+
+            <section id="structure" class="section">
+                <h2>Структура HTML-документа</h2>
+                <p>Каждая HTML-страница имеет базовую структуру, которая включает следующие элементы:</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Заголовок страницы&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Содержимое страницы --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+                
+                <h3>Объяснение структуры</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Элемент</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">&lt;!DOCTYPE html&gt;</span></td>
+                            <td>Объявление типа документа (HTML5)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;html&gt;</span></td>
+                            <td>Корневой элемент всей страницы</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;head&gt;</span></td>
+                            <td>Содержит метаинформацию о документе</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;!----&gt;</span></td>
+                            <td>Комментарий который будет виден лишь в коде но не конечному пользователю</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;meta&gt;</span></td>
+                            <td>Определяет метаданные (кодировка, viewport)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;title&gt;</span></td>
+                            <td>Заголовок страницы (отображается во вкладке браузера)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;body&gt;</span></td>
+                            <td>Содержит видимое содержимое страницы</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="text" class="section">
+                <h2>Текстовые элементы</h2>
+                <p>HTML предоставляет различные элементы для форматирования текста:</p>
+                
+                <h3>Заголовки</h3>
+                <p>Заголовки определяются тегами <span class="tag">&lt;h1&gt;</span> до <span class="tag">&lt;h6&gt;</span>, где <span class="tag">&lt;h1&gt;</span> - самый важный заголовок.</p>
+                
+                <div class="example">
+                    <h4>Пример заголовков:</h4>
+                    <h1>Заголовок 1 уровня</h1>
+                    <h2>Заголовок 2 уровня</h2>
+                    <h3>Заголовок 3 уровня</h3>
+                    <h4>Заголовок 4 уровня</h4>
+                    <h5>Заголовок 5 уровня</h5>
+                    <h6>Заголовок 6 уровня</h6>
+                </div>
+                
+                <h3>Тег абзаца и форматирование</h3>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;p&gt;Это обычный параграф текста.&lt;/p&gt;
+&lt;p&gt;Это &lt;strong&gt;важный&lt;/strong&gt; текст.&lt;/p&gt;
+&lt;p&gt;Это &lt;em&gt;выделенный&lt;/em&gt; текст.&lt;/p&gt;
+&lt;p&gt;Это &lt;mark&gt;помеченный&lt;/mark&gt; текст.&lt;/p&gt;
+&lt;p&gt;Это &lt;small&gt;маленький&lt;/small&gt; текст.&lt;/p&gt;
+&lt;p&gt;Это &lt;del&gt;удаленный&lt;/del&gt; текст.&lt;/p&gt;
+&lt;p&gt;Это &lt;ins&gt;вставленный&lt;/ins&gt; текст.&lt;/p&gt;</code></pre>
+                </div>
+
+
+                <h3>Объяснение структуры</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Элемент</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">&lt;p&gt;&lt;/p&gt;</span></td>
+                            <td>Простой абзац</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;strong&gt;&lt;/strong&gt;</span></td>
+                            <td><strong>Добавляет обёрнутому в него слову или фразе очень высокую важность</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;em&gt;&lt;/em&gt;</span></td>
+                            <td><em>По умолчанию выделяется курсивом</em></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;mark&gt;&lt;/mark&gt;</span></td>
+                            <td><mark>Выделяет или подсвечивает важный фрагмент текста</mark></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;small&gt;&lt;/small&gt;</span></td>
+                            <td><small>Используется для вывода текста мелким шрифтом</small></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;del&gt;&lt;/del&gt;</span></td>
+                            <td><del>Используется для отображения удалённого контента</del></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;ins&gt;&lt;/ins&gt;</span></td>
+                            <td><ins>Используется для отображения добавленного контента</ins></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="lists" class="section">
+                <h2>Списки</h2>
+                <p>HTML поддерживает три типа списков:</p>
+                
+                <h3>Нумерованный список</h3>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;ol&gt;
+    &lt;li&gt;Первый пункт&lt;/li&gt;
+    &lt;li&gt;Второй пункт&lt;/li&gt;
+    &lt;li&gt;Третий пункт&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                </div>
+                <ol>
+                    <li>Первый пункт</li>
+                    <li>Второй пункт</li>
+                    <li>Третий пункт</li>
+                </ol>
+
+
+                <h3>Маркированный список</h3>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;ul&gt;
+    &lt;li&gt;Пункт списка&lt;/li&gt;
+    &lt;li&gt;Еще один пункт&lt;/li&gt;
+    &lt;li&gt;И еще один&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                </div>
+                
+                <ul>
+                    <li>Пункт списка</li>
+                    <li>Еще один пункт</li>
+                    <li>И еще один</li>
+                </ul>
+
+                <h3>Список определений</h3>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;Язык разметки гипертекста&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Каскадные таблицы стилей&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                </div>
+            </section>
+
+                <dl>
+                    <dt>HTML</dt>
+                    <dd>Язык разметки гипертекста</dd>
+                    <dt>CSS</dt>
+                    <dd>Каскадные таблицы стилей</dd>
+                </dl>
+
+            <section id="links" class="section">
+                <h2>Ссылки</h2>
+                <p>Ссылки создаются с помощью тега <span class="tag">&lt;a&gt;</span> и атрибута <span class="tag">href</span>.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;!-- Внешняя ссылка --&gt;
+&lt;a href="https://example.com"&gt;Посетите Example.com&lt;/a&gt;
+
+&lt;!-- Внутренняя ссылка --&gt;
+&lt;a href="about.html"&gt;О нас&lt;/a&gt;
+
+&lt;!-- Ссылка на якорь --&gt;
+&lt;a href="#section1"&gt;Перейти к разделу 1&lt;/a&gt;
+
+&lt;!-- Ссылка с атрибутом target --&gt;
+&lt;a href="https://example.com" target="_blank"&gt;Открыть в новой вкладке&lt;/a&gt;</code></pre>
+                </div>
+                
+                <h3>Атрибуты ссылок</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Атрибут</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">href</span></td>
+                            <td>URL-адрес, на который ведет ссылка</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">target</span></td>
+                            <td>Определяет, где открыть ссылку (_blank, _self)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">rel</span></td>
+                            <td>Отношение между текущим и связанным документом</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">download</span></td>
+                            <td>Указывает, что ссылка ведет на файл для скачивания</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="images" class="section">
+                <h2>Изображения</h2>
+                <p>Для вставки изображений используется тег <span class="tag">&lt;img&gt;</span>.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;img src="image.jpg" alt="Описание изображения" width="300" height="200"&gt;</code></pre>
+                </div>
+                
+                <h3>Атрибуты изображений</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Атрибут</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">src</span></td>
+                            <td>Путь к файлу изображения</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">alt</span></td>
+                            <td>Альтернативный текст (обязателен для доступности)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">width</span> и <span class="tag">height</span></td>
+                            <td>Ширина и высота изображения в пикселях</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">title</span></td>
+                            <td>Всплывающая подсказка при наведении</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="note">
+                    <h4>Важно!</h4>
+                    <p>Всегда указывайте атрибут <span class="tag">alt</span> для изображений. Это важно для доступности и SEO.</p>
+                </div>
+            </section>
+
+            <section id="tables" class="section">
+                <h2>Таблицы</h2>
+                <p>Таблицы создаются с помощью тега <span class="tag">&lt;table&gt;</span> и содержат строки (<span class="tag">&lt;tr&gt;</span>), ячейки (<span class="tag">&lt;td&gt;</span>) и заголовки (<span class="tag">&lt;th&gt;</span>).</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;table&gt;
+    &lt;caption&gt;Заголовок таблицы&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Заголовок 1&lt;/th&gt;
+            &lt;th&gt;Заголовок 2&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Данные 1&lt;/td&gt;
+            &lt;td&gt;Данные 2&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+                
+                <table>
+                    <caption>Заголовок таблицы</caption>
+                    <thead>
+                        <tr>
+                            <th>Заголовок 1</th>
+                            <th>Заголовок 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Данные 1</td>
+                            <td>Данные 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Элементы таблицы</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Элемент</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">&lt;table&gt;</span></td>
+                            <td>Контейнер для всей таблицы</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;caption&gt;</span></td>
+                            <td>Заголовок таблицы</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;thead&gt;</span></td>
+                            <td>Заголовок таблицы (содержит &lt;th&gt;)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;tbody&gt;</span></td>
+                            <td>Основное тело таблицы</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;tfoot&gt;</span></td>
+                            <td>Нижняя часть таблицы</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;tr&gt;</span></td>
+                            <td>Строка таблицы</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;th&gt;</span></td>
+                            <td>Ячейка заголовка</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;td&gt;</span></td>
+                            <td>Ячейка с данными</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="forms" class="section">
+                <h2>Формы</h2>
+                <p>Формы используются для сбора данных от пользователей. Основной элемент - <span class="tag">&lt;form&gt;</span>.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;form action="/submit" method="post"&gt;
+    &lt;label for="name"&gt;Имя:&lt;/label&gt;
+    &lt;input type="text" id="name" name="name" required&gt;
+    
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" required&gt;
+    
+    &lt;label for="message"&gt;Сообщение:&lt;/label&gt;
+    &lt;textarea id="message" name="message"&gt;&lt;/textarea&gt;
+    
+    &lt;button type="submit"&gt;Отправить&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                
+                <h3>Основные элементы форм</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Элемент</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">&lt;input&gt;</span></td>
+                            <td>Поле ввода (текст, email, пароль и т.д.)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;textarea&gt;</span></td>
+                            <td>Многострочное текстовое поле</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;select&gt;</span></td>
+                            <td>Раскрывающийся список</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;button&gt;</span></td>
+                            <td>Кнопка</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;label&gt;</span></td>
+                            <td>Подпись для элемента формы</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;fieldset&gt;</span></td>
+                            <td>Группировка связанных элементов</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;legend&gt;</span></td>
+                            <td>Заголовок для fieldset</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="semantic" class="section">
+                <h2>Семантические элементы HTML5</h2>
+                <p>Семантические элементы четко описывают свое значение как для браузера, так и для разработчика.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;header&gt;
+    &lt;h1&gt;Заголовок сайта&lt;/h1&gt;
+    &lt;nav&gt;Навигация&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Заголовок статьи&lt;/h2&gt;
+        &lt;p&gt;Содержимое статьи&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;aside&gt;Боковая панель&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;Нижняя часть сайта&lt;/footer&gt;</code></pre>
+                </div>
+                
+                <h3>Основные семантические элементы</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Элемент</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">&lt;header&gt;</span></td>
+                            <td>Вводная часть или навигация</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;nav&gt;</span></td>
+                            <td>Навигационные ссылки</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;main&gt;</span></td>
+                            <td>Основное содержимое документа</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;article&gt;</span></td>
+                            <td>Самостоятельный контент (статья, пост)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;section&gt;</span></td>
+                            <td>Тематическая группа контента</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;aside&gt;</span></td>
+                            <td>Боковая панель или дополнительный контент</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;footer&gt;</span></td>
+                            <td>Нижняя часть документа или раздела</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="note">
+                    <h4>Преимущества семантических элементов</h4>
+                    <ul>
+                        <li>Улучшенная доступность для скринридеров</li>
+                        <li>Лучшая SEO-оптимизация</li>
+                        <li>Более понятная структура кода</li>
+                        <li>Упрощенная стилизация с помощью CSS</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="File" class="section">
+                <h2>Файловые эмелементы</h2>
+                <p>В HTML есть два тега, что позволяют выполнить подключение CSS и JavaScript файлов.</p>
+                
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;header&gt;
+    &lt;link href="style.css" rel=stylesheet type="text/css"&gt;
+    &lt;script src="external.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+                
+                <h3>Атрибуты файлов</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Элемент</th>
+                            <th>Назначение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag">&lt;link&gt;</span></td>
+                            <td>Определяет отношения между текущим документом и внешним ресурсом
+                        </td>
+                        <tr>
+                            <td><span class="tag">&lt;herf&gt;</span></td>
+                            <td>Указывает ссылку или путь к подключаемому файлу</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;rel&gt;</span></td>
+                            <td>Описывает как связаны текущая страница и подключаемый ресурс</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag">&lt;type&gt;</span></td>
+                            <td>Содержит тип связанного ресурса</td>
+                        </tr>
+                    <tr>
+                        <th>Элемент</th>
+                        <th>Назначение</th>
+                    </tr>
+                        <tr>
+                            <td><span class="tag">&lt;script&gt;</span></td>
+                            <td>Элемент кода, который позволяет совершать действия, включать анимацию и создавать другие эффекты на странице испульзуя JavaScript</td>
+                        </tr>
+                            <tr>
+                            <td><span class="tag">&lt;src&gt;</span></td>
+                            <td>Указывает путь к файлу</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="conclusion" class="section">
+                <h2>Заключение</h2>
+                <p>Теперь вы знаете язык разметки HTML и далее вам необходимо изучить язык стилей CSS. После изучения CSS ваши сайты преобразятся как никогда ранее и вы сможете уже создавать отличные современные веб сайты с любым дизайном.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О проекте</h3>
+                    <p>SKETHWebCourse - это образовательная платформа для изучения веб-разработки с нуля. Мы предлагаем лекционные и практические уроки с примерами проектов для закрепления знаний.</p>
+                </div>
+            </div>
+            <div class="support">
+                Сделано при поддержке <span>Crushers</span> и <span>SKETH</span>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    document.querySelectorAll('.sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+        
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.sidebar a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
